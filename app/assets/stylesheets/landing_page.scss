@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+}
+
+.landing-page {
+    display: grid;
+
+    grid-template-columns: 300px auto;
+    grid-template-areas:
+        "recent-network-list recent-network-graph"
+        "recent-game-list recent-game-list";
+
+    .panel {
+        border: 1px solid #d1d5da;
+        border-radius: 3px;
+
+        margin: 4px;
+
+        > .title {
+            background: #f6f8fa;
+            border-bottom: 1px solid #d1d5da;
+            font-weight: bold;
+            padding: 4px;
+        }
+    }
+
+    .panel:not(.no-padding) {
+        > .body {
+            padding: 4px;
+        }
+    }
+}
+
+.recent-network-list {
+    grid-area: recent-network-list;
+
+    > .body {
+        overflow-y: scroll;
+        height: calc(282px - 24px);
+        padding: 0;
+    }
+
+    .row {
+        &:not(:first-child) {
+            border-top: 1px solid #eaecef;
+        }
+
+        color: #586069;
+        padding: 2px 8px 2px 4px;
+        line-height: 18px;
+        font-size: 90%;
+
+        &:hover {
+            background: #f6f8fa;
+        }
+
+        > .title {
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+            width: 70%;
+        }
+
+        > .number-of-games {
+            font-family: 'Lato';
+            text-align: right;
+
+            width: 30%;
+        }
+
+        > .title, > .number-of-games {
+            display: inline-block;
+        }
+    }
+}
+
+.recent-network-graph {
+    grid-area: recent-network-graph;
+}
+
+.recent-game-list {
+    grid-area: recent-game-list;
+}

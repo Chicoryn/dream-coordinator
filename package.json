@@ -1,0 +1,18 @@
+{
+  "name": "dream-coordinator",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "3.4",
+    "@types/react": "^16.3.12",
+    "@types/react-dom": "^16.0.5",
+    "babel-preset-react": "^6.24.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "ts-loader": "3.5.0",
+    "typescript": "^2.8.3"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
+}
