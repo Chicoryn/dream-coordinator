@@ -7,7 +7,7 @@
 default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  timeout: 60000
 
 development:
   <<: *default
@@ -21,5 +21,13 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  database: dg_prod
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  min_messages: warning
+  timeout: 30000
+  username: root
+  password: hayDK0j!MYh15Do0
+  host: maria.dg.io
+  port: 3306

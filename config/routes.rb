@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :networks, only: [:index, :create]
+      resources :networks, only: [:index, :create, :update]
+      resources :features, only: [:index, :create]
+      resources :games, only: [:index, :create]
     end
   end
 end

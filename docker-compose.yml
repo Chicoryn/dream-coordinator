@@ -1,0 +1,20 @@
+version: '3.6'
+services:
+    web:
+        build: .
+        command: bundle exec rails s -p 5000 -b '0.0.0.0'
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./:/app
+        links:
+            - mariadb:maria.dg.io
+    mariadb:
+        image: mariadb:latest
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: "hayDK0j!MYh15Do0"
+        volumes:
+            - ./db/production:/var/lib/mysql

@@ -4,8 +4,11 @@ import * as ReactDOM from 'react-dom';
 import {PanelComponent} from './panel';
 
 export interface Network {
-    id: string,
+    id: number,
+    elo?: number,
     name: string,
+    number_of_features: number,
+    number_of_games: number,
     created_at: string,
     updated_at: string
 }
@@ -32,8 +35,8 @@ export class NetworksList extends React.PureComponent<Props, {}> {
                     <span className='title'>
                         {network.name}
                     </span>
-                    <span className='number-of-games'>
-                        {NetworksList.format(1234567.0)}
+                    <span className='number-of-features'>
+                        {NetworksList.format(network.number_of_features)}
                     </span>
                 </div>;
             })}

@@ -5,7 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-50.times do |i|
-    Network.create!(name: "network #{i}", data: "")
-end

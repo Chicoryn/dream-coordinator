@@ -1,28 +1,16 @@
 class Api::V1::NetworksController < Api::V1::BaseController
     def index
-        @networks = Network.all
-            .select([:id, :name, :created_at, :updated_at])
+        respond_with Network.all
+            .select([:id, :name, :elo, *(:data if params[:full]), :created_at, :updated_at])
+            .where(params[:filter]&.permit(:id, :name))
             .order([:created_at]).reverse_order
-
-        respond_with @networks
+            .limit(params[:limit]&.to_i)
     end
 
     def create
-        respond_with :api, :v1, Network.create(
-            params.permit(:name, :data)
-        )
-    end
+        @network = Network.new(params[:network]&.permit(:name, :data, :created_at))
+        @network[:data] = Base64.decode64(@network[:data])
 
-    def destroy
-        respond_with Network.destroy(params[:id])
-    end
-
-    def update
-        network = Network.find(params[:id])
-        network.update_attributes(
-            params.permit(:name, :data)
-        )
-
-        respond_with network, :json => network
+        head @network.save ? :ok : :bad_request
     end
 end

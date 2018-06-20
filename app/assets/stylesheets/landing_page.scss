@@ -60,14 +60,14 @@ body {
             width: 70%;
         }
 
-        > .number-of-games {
+        > .number-of-features {
             font-family: 'Lato';
             text-align: right;
 
             width: 30%;
         }
 
-        > .title, > .number-of-games {
+        > .title, > .number-of-features {
             display: inline-block;
         }
     }
@@ -79,4 +79,40 @@ body {
 
 .recent-game-list {
     grid-area: recent-game-list;
+
+    > .body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .recent-game {
+        margin: 4px;
+
+        .recent-game-status {
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            text-align: center;
+            padding-bottom: 4px;
+
+            color: #586069;
+            transition: color 0.5s;
+        }
+
+        canvas {
+            opacity: 0.8;
+            transition: opacity 0.5s;
+            cursor: pointer;
+        }
+
+        &:hover {
+            .recent-game-status {
+                color: black;
+            }
+
+            canvas {
+                opacity: 1.0;
+            }
+        }
+    }
 }

@@ -3,10 +3,11 @@ import * as ReactDOM from 'react-dom';
 
 import {PanelComponent} from './panel';
 import {Network, NetworksList} from './network-list';
+import {Game, RecentGameList} from './recent-game-list';
 
 interface State {
     networks: Array<Network>,
-    games: Array<string>,
+    games: Array<Game>,
 }
 
 /**
@@ -14,6 +15,7 @@ interface State {
  */
 class LandingPageComponent extends React.Component<{}, State> {
     networks_timer?: any;
+    games_timer?: any;
 
     constructor(props, context) {
         super(props, context);
@@ -30,7 +32,7 @@ class LandingPageComponent extends React.Component<{}, State> {
         }).then(resp => {
             this.setState((_prevState, _props) => {
                 return {
-                    networks: resp as Array<Network>
+                    networks: resp as Array<Network> || []
                 };
             });
         }).then(() => {
@@ -40,20 +42,39 @@ class LandingPageComponent extends React.Component<{}, State> {
         });
     }
 
+    updateGameList() {
+        fetch('/api/v1/games.json?limit=50').then(resp => {
+            return resp.json();
+        }).then(resp => {
+            this.setState((_prevState, _props) => {
+                return {
+                    games: resp as Array<Game> || []
+                };
+            });
+        }).then(() => {
+            this.games_timer = setTimeout(() => this.updateGameList(), 30000);
+        }, () => {
+            this.games_timer = setTimeout(() => this.updateGameList(), 30000);
+        });
+    }
+
     componentDidMount() {
         this.updateNetworkList();
+        this.updateGameList();
     }
 
     componentWillUnmount() {
         if (this.networks_timer)
             clearTimeout(this.networks_timer);
+        if (this.games_timer)
+            clearTimeout(this.games_timer);
     }
 
     render() {
         return (<>
             <NetworksList networks={this.state.networks} />
             <NetworksEloGraph />
-            <RecentGameList />
+            <RecentGameList games={this.state.games} />
         </>);
     }
 }
@@ -64,16 +85,6 @@ class NetworksEloGraph extends React.PureComponent {
                                title='Elo ratings'
         >
             This should be a full graph of the networks Elo rating over time
-        </PanelComponent>;
-    }
-}
-
-class RecentGameList extends React.PureComponent {
-    render() {
-        return <PanelComponent className='recent-game-list'
-                               title='Recent Games'
-        >
-            This should be a thumbnail grid of the 100 most recently played games
         </PanelComponent>;
     }
 }

@@ -2,7 +2,7 @@
   "name": "dream-coordinator",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.4",
+    "@rails/webpacker": "3.5",
     "@types/react": "^16.3.12",
     "@types/react-dom": "^16.0.5",
     "babel-preset-react": "^6.24.1",
