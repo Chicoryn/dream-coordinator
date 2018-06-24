@@ -13,4 +13,11 @@ class Api::V1::NetworksController < Api::V1::BaseController
 
         head @network.save ? :ok : :bad_request
     end
+
+    def update
+        @network = Network.find_by_id(params[:id])
+        status = @network.update_attributes(params[:network]&.permit(:elo))
+
+        head status ? :ok : :bad_request
+    end
 end

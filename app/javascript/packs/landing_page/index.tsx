@@ -2,8 +2,10 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import {PanelComponent} from './panel';
-import {Network, NetworksList} from './network-list';
-import {Game, RecentGameList} from './recent-game-list';
+import {NetworksEloGraph} from './network-elo-graph';
+import {NetworksList} from './network-list';
+import {RecentGameList} from './recent-game-list';
+import {Network, Game} from './models';
 
 interface State {
     networks: Array<Network>,
@@ -73,19 +75,9 @@ class LandingPageComponent extends React.Component<{}, State> {
     render() {
         return (<>
             <NetworksList networks={this.state.networks} />
-            <NetworksEloGraph />
+            <NetworksEloGraph networks={this.state.networks} />
             <RecentGameList games={this.state.games} />
         </>);
-    }
-}
-
-class NetworksEloGraph extends React.PureComponent {
-    render() {
-        return <PanelComponent className='recent-network-graph'
-                               title='Elo ratings'
-        >
-            This should be a full graph of the networks Elo rating over time
-        </PanelComponent>;
     }
 }
 

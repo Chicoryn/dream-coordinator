@@ -3,13 +3,7 @@ import * as ReactDOM from 'react-dom';
 
 import {PanelComponent} from './panel';
 import {RecentGame} from './recent-game';
-
-export interface Game {
-    id: number,
-    data: string,
-    created_at: string,
-    updated_at: string
-}
+import {Game} from './models';
 
 interface Props {
     games: Array<Game>

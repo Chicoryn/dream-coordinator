@@ -2,16 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import {PanelComponent} from './panel';
-
-export interface Network {
-    id: number,
-    elo?: number,
-    name: string,
-    number_of_features: number,
-    number_of_games: number,
-    created_at: string,
-    updated_at: string
-}
+import {Network} from './models';
 
 interface Props {
     networks: Array<Network>

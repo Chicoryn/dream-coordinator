@@ -75,6 +75,22 @@ body {
 
 .recent-network-graph {
     grid-area: recent-network-graph;
+
+    > .body {
+        height: calc(282px - 24px);
+
+        // workaround for recharts `.responsive-container` not working with grid
+        // nor flex layouts.
+        position: relative;
+
+        .fixed-container {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+    }
 }
 
 .recent-game-list {
