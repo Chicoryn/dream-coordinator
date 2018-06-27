@@ -19,11 +19,21 @@ interface NetworkGraph extends Network {
  */
 export class NetworksEloGraph extends React.PureComponent<Props> {
     renderTooltip(external: any) {
-        if (external.active) {
-            let payload = external.payload && external.payload[0].payload;
+        if (external.active && external.payload && external.payload.length > 0) {
+            let payload: NetworkGraph = external.payload[0].payload;
 
-            return <div>
-                {payload.name}: {payload.elo}
+            return <div className="network-elo-tooltip">
+                <div className="name">{payload.name}</div>
+                <table>
+                    <tr>
+                        <td>elo</td>
+                        <td>{payload.elo.toLocaleString()}</td>
+                    </tr>
+                    <tr>
+                        <td>games</td>
+                        <td>{payload.number_of_cumulative_features.toLocaleString()}</td>
+                    </tr>
+                </table>
             </div>
         } else {
             return null;
@@ -34,6 +44,7 @@ export class NetworksEloGraph extends React.PureComponent<Props> {
         let data: Array<NetworkGraph> = this.props.networks.reverse().reduce((acc, network) => {
             let other = network as NetworkGraph;
 
+            other.elo = other.elo != null ? other.elo : NaN;
             other.number_of_cumulative_features = acc.number_of_cumulative_features;
 
             acc.number_of_cumulative_features += other.number_of_features;

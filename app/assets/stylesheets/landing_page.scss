@@ -91,6 +91,21 @@ body {
             bottom: 0;
         }
     }
+
+    .network-elo-tooltip {
+        background: white;
+        padding: 4px;
+        border: 1px solid #d1d5da;
+
+        .name {
+            font-weight: bold;
+        }
+
+        table {
+            font-size: 85%;
+            opacity: 0.5;
+        }
+    }
 }
 
 .recent-game-list {
