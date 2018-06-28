@@ -33,6 +33,10 @@ export class NetworksEloGraph extends React.PureComponent<Props> {
                         <td>games</td>
                         <td>{payload.number_of_cumulative_features.toLocaleString()}</td>
                     </tr>
+                    <tr>
+                        <td>id</td>
+                        <td>{payload.id.toLocaleString()}</td>
+                    </tr>
                 </table>
             </div>
         } else {
