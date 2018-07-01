@@ -1,9 +1,11 @@
 class Api::V1::FeaturesController < Api::V1::BaseController
     def index
+        sort = params[:sort]&.permit(:id, :created_at, :updated_at, :network_id)&.to_h || {created_at: :desc}
+
         respond_with Feature.all
             .select([:id, :network_id, :data])
             .where(params[:filter]&.permit(:id, :network_id))
-            .order([:created_at]).reverse_order
+            .order(sort)
             .limit(params[:limit]&.to_i || 50)
     end
 
