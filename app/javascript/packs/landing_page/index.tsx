@@ -38,9 +38,9 @@ class LandingPageComponent extends React.Component<{}, State> {
                 };
             });
         }).then(() => {
-            this.networks_timer = setTimeout(() => this.updateNetworkList(), 5000);
+            this.networks_timer = setTimeout(() => this.updateNetworkList(), 15000);
         }, () => {
-            this.networks_timer = setTimeout(() => this.updateNetworkList(), 5000);
+            this.networks_timer = setTimeout(() => this.updateNetworkList(), 15000);
         });
     }
 

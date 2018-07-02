@@ -9,10 +9,6 @@ interface Props {
     networks: Array<Network>
 }
 
-interface NetworkGraph extends Network {
-    number_of_cumulative_features: number
-}
-
 /**
  * Wrapper around a Recharts, which plots the networks ELO rating over the
  * number of features.
@@ -20,7 +16,7 @@ interface NetworkGraph extends Network {
 export class NetworksEloGraph extends React.PureComponent<Props> {
     renderTooltip(external: any) {
         if (external.active && external.payload && external.payload.length > 0) {
-            let payload: NetworkGraph = external.payload[0].payload;
+            let payload: Network = external.payload[0].payload;
 
             return <div className="network-elo-tooltip">
                 <div className="name">{payload.name}</div>
@@ -30,8 +26,8 @@ export class NetworksEloGraph extends React.PureComponent<Props> {
                         <td>{payload.elo.toLocaleString()}</td>
                     </tr>
                     <tr>
-                        <td>games</td>
-                        <td>{payload.number_of_cumulative_features.toLocaleString()}</td>
+                        <td>features</td>
+                        <td>{payload.number_of_preceding.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td>id</td>
@@ -45,20 +41,12 @@ export class NetworksEloGraph extends React.PureComponent<Props> {
     }
 
     render() {
-        let data: Array<NetworkGraph> = this.props.networks.reverse().reduce((acc, network) => {
-            let other = network as NetworkGraph;
-
+        let data: Array<Network> = this.props.networks.reverse().map(network => {
+            let other = Object.assign({}, network);
             other.elo = other.elo != null ? other.elo : NaN;
-            other.number_of_cumulative_features = acc.number_of_cumulative_features;
 
-            acc.number_of_cumulative_features += other.number_of_features;
-            acc.result.push(other);
-
-            return acc;
-        }, {
-            number_of_cumulative_features: 0,
-            result: []
-        }).result;
+            return other;
+        });
 
         return <PanelComponent className='recent-network-graph no-padding'
                                title='Elo ratings'
@@ -66,7 +54,7 @@ export class NetworksEloGraph extends React.PureComponent<Props> {
             <div className="fixed-container">
                 <ResponsiveContainer>
                     <AreaChart data={data}>
-                        <XAxis dataKey="number_of_cumulative_features" type="number" />
+                        <XAxis dataKey="number_of_preceding" type="number" />
                         <YAxis type="number" />
                         <CartesianGrid strokeDasharray="3 3" />
                         <Tooltip content={(external) => this.renderTooltip(external)} />

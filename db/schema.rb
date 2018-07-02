@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_20_183325) do
+ActiveRecord::Schema.define(version: 2018_07_02_202835) do
 
   create_table "features", force: :cascade do |t|
     t.integer "network_id"
-    t.binary "data", limit: 16777216
+    t.binary "data", limit: 4294967295
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_features_on_created_at"
     t.index ["network_id"], name: "index_features_on_network_id"
   end
 
   create_table "games", force: :cascade do |t|
     t.integer "network_id"
     t.string "category"
-    t.binary "data", limit: 16777216
+    t.binary "data", limit: 4294967295
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["network_id"], name: "index_games_on_network_id"
@@ -32,7 +33,7 @@ ActiveRecord::Schema.define(version: 2018_06_20_183325) do
   create_table "networks", force: :cascade do |t|
     t.string "name"
     t.float "elo"
-    t.binary "data", limit: 33554432
+    t.binary "data", limit: 4294967295
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

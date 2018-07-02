@@ -4,6 +4,7 @@ export interface Network {
     name: string,
     number_of_features: number,
     number_of_games: number,
+    number_of_preceding: number,
     created_at: string,
     updated_at: string
 }

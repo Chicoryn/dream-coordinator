@@ -7,8 +7,11 @@ services:
             - "5000:5000"
         volumes:
             - ./:/app
+        environment:
+            HOME: /tmp  # necessary because we override the current user
         links:
             - mariadb:maria.dg.io
+        user: 1000:1000
     mariadb:
         image: mariadb:latest
         restart: always
@@ -18,3 +21,4 @@ services:
             MYSQL_ROOT_PASSWORD: "hayDK0j!MYh15Do0"
         volumes:
             - ./db/production:/var/lib/mysql
+        user: 1000:1000
