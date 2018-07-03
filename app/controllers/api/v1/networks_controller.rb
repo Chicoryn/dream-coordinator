@@ -3,7 +3,7 @@ class Api::V1::NetworksController < Api::V1::BaseController
         sort = params[:sort]&.permit(:id, :created_at, :updated_at, :elo)&.to_h || {created_at: :desc}
 
         respond_with Network.all
-            .select([:id, :name, :elo, *(:data if params[:full]), :created_at, :updated_at])
+            .select([:id, :name, :elo, *(:data if params[:full]), :number_of_features, :number_of_games, :number_of_preceding, :created_at, :updated_at])
             .where(params[:filter]&.permit(:id, :name))
             .order(sort)
             .limit(params[:limit]&.to_i)

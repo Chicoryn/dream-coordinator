@@ -54,7 +54,7 @@ export class NetworksEloGraph extends React.PureComponent<Props> {
             <div className="fixed-container">
                 <ResponsiveContainer>
                     <AreaChart data={data}>
-                        <XAxis dataKey="number_of_preceding" type="number" />
+                        <XAxis dataKey="number_of_preceding" type="number" domain={[0, 'dataMax']} />
                         <YAxis type="number" />
                         <CartesianGrid strokeDasharray="3 3" />
                         <Tooltip content={(external) => this.renderTooltip(external)} />
