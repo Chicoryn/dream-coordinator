@@ -2,7 +2,7 @@ class Network < ApplicationRecord
     has_many :features
     has_many :games
 
-    after_create :initialize_denormalized
+    before_create :initialize_denormalized
 
     def initialize_denormalized
         self.number_of_games = self.games.count

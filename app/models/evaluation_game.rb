@@ -1,0 +1,2 @@
+class EvaluationGame < ApplicationRecord
+end

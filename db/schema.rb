@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_02_225704) do
+ActiveRecord::Schema.define(version: 2018_07_03_183720) do
+
+  create_table "evaluation_games", force: :cascade do |t|
+    t.binary "data", limit: 4294967295
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "features", force: :cascade do |t|
     t.integer "network_id"
