@@ -29,5 +29,5 @@ production:
   timeout: 30000
   username: root
   password: hayDK0j!MYh15Do0
-  host: sql.dg.io
+  host: <%= ENV.fetch("MYSQL_HOST") { "localhost" } %>
   port: 3306

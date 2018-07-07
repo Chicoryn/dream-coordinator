@@ -10,6 +10,6 @@ ENV NODE_ENV "production"
 VOLUME [ "/app" ]
 
 WORKDIR /app
-COPY Gemfile ./
-COPY Gemfile.lock ./
-RUN bundle install
+COPY . ./
+RUN bundle install && yarn install
+CMD bundle exec rails s -p 5000 -b '0.0.0.0'

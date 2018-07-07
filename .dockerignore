@@ -1,2 +1,5 @@
-db/
-
+.git
+db/production
+db/*.sqlite3
+log/*.log
+tmp/

@@ -2,16 +2,12 @@ version: '3.6'
 services:
     web:
         build: .
-        command: bundle exec rails s -p 5000 -b '0.0.0.0'
         ports:
             - "5000:5000"
-        volumes:
-            - ./:/app
         environment:
-            HOME: /tmp  # necessary because we override the current user
+            MYSQL_HOST: "sql.dg.io"
         links:
             - mariadb:sql.dg.io
-        user: 1000:1000
     mariadb:
         image: mariadb:latest
         restart: always
