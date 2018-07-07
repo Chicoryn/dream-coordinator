@@ -29,5 +29,5 @@ production:
   timeout: 30000
   username: root
   password: hayDK0j!MYh15Do0
-  host: maria.dg.io
+  host: sql.dg.io
   port: 3306

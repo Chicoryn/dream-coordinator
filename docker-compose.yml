@@ -10,7 +10,7 @@ services:
         environment:
             HOME: /tmp  # necessary because we override the current user
         links:
-            - mariadb:maria.dg.io
+            - mariadb:sql.dg.io
         user: 1000:1000
     mariadb:
         image: mariadb:latest
