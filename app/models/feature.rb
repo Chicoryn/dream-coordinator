@@ -12,8 +12,10 @@ class Feature < ApplicationRecord
     end
 
     def as_json(options={})
-        f = super(options)
-        f[:data] = Base64.strict_encode64(self.data)
-        f
+        {
+            id: self.id,
+            network_id: self.network_id,
+            data: Base64.strict_encode64(self.data || '')
+        }
     end
 end
