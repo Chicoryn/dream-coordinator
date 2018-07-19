@@ -20,9 +20,9 @@ class Feature < ApplicationRecord
         f << '"network_id":'
         f << self.network_id.to_s
         f << ','
-        f << '"data":'
+        f << '"data":"'
         f << Base64.strict_encode64(self.data || '')
-        f << '}'
+        f << '"}'
         f.string
     end
 end
