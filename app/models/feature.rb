@@ -11,11 +11,18 @@ class Feature < ApplicationRecord
         following.update_all('`number_of_preceding` = `number_of_preceding` + 1')
     end
 
-    def as_json(options={})
-        {
-            id: self.id,
-            network_id: self.network_id,
-            data: Base64.strict_encode64(self.data || '')
-        }
+    def to_json
+        f = StringIO::new()
+        f << '{'
+        f << '"id":'
+        f << self.id.to_s
+        f << ','
+        f << '"network_id":'
+        f << self.network_id.to_s
+        f << ','
+        f << '"data":'
+        f << Base64.strict_encode64(self.data || '')
+        f << '}'
+        f.string
     end
 end
